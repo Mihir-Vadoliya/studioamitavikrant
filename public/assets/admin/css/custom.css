@@ -1,0 +1,55 @@
+body {
+    background-color: #ffffff;
+}
+
+.card-inner {
+    box-shadow: 0px 0px 10px #f1f1f1;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    color: #323941;
+    background-color: #38F2AE;
+    border-color: #38F2AE;
+}
+
+.btn-primary:hover {
+    background: #323941;
+    color: #38F2AE;
+    border-color: #323941;
+}
+
+.link-primary {
+    color: #38F2AE !important;
+}
+
+.form-control:focus {
+    border-color: #38F2AE;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    background: #cdedcb;
+    border-color: #cdedcb;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    background: #cdedcb;
+    border-color: #cdedcb;
+}
+
+.is-light .nk-menu-link:hover, .is-light .active > .nk-menu-link {
+    color: #323941;
+}
+
+.is-light .nk-menu-link:hover, .is-light .active > .nk-menu-link {
+    background: #38F2AE;
+}
+
+.nk-menu-link:hover .nk-menu-icon, .nk-menu-item.active > .nk-menu-link .nk-menu-icon, .nk-menu-item.current-menu > .nk-menu-link .nk-menu-icon {
+    color: #323941;
+}
+
+.page-item.active .page-link {
+    background-color: #38F2AE;
+    border-color: #38F2AE;
+}

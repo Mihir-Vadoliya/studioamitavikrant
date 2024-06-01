@@ -1,0 +1,140 @@
+@extends('admin.layouts.app')
+@section('title', '| Blog Edit')
+@section('content')
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+	<style>
+		.select2-container--default .select2-selection--multiple .select2-selection__choice{
+			color: #000;
+		}
+	</style>
+
+	<div class="content-wrapper">
+
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>Blog Edit</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+							<li class="breadcrumb-item active">Blog Edit</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="content">
+		    <div class="container-fluid">
+		        <div class="row justify-content-center">
+
+		            <div class="col-12">
+
+		                <div class="card card-primary">
+		                    <div class="card-header">
+		                        <h3 class="card-title">Blog Edit</h3>
+		                    </div>
+		                    
+		                    <form method="post" action="{{ route('blog.update', [ 'blog' => $data->id ] ) }}" enctype='multipart/form-data'>
+							    @csrf
+							    @method('PUT')
+							    
+		                        <div class="card-body">
+		                            <div class="form-group">
+		                                <label class="fw-bold"> Name</label>
+								        <input name="name" id="name" type="name" placeholder="Category Name" class="form-control login_field " value="{{ $data->name }}">
+		                            </div>
+		                            <div class="row">
+			                            <div class="col-6 form-group">
+	                                		<label class="fw-bold">Category</label>
+	                                	    <select class="form-control form-select" name="category_id">
+	                                	    	<option value="">Select</option>
+	                                	    	@foreach($category as $cat)
+	                                	    		<option value="{{ $cat->id }}" @if($data->category_id == $cat->id) selected @endif>{{ $cat->name }}</option>
+	                                	    	@endforeach
+	                                	    </select>
+	    	                            </div>
+	    	                            <div class="col-6 form-group">
+	                                		<label class="fw-bold">Publish At</label>
+	                                	    <select class="form-control form-select" name="page">
+	                                	    	<option value="">Select</option>
+	                                	    	<option value="news" @if($data->page == "news") selected @endif>News</option>
+	                                	    	<option value="research" @if($data->page == "research") selected @endif>Research</option>
+	                                	    </select>
+	    	                            </div>
+    	                            </div>
+    	                            <div class="row">
+	                                    <div class="col-6 form-group">
+	                                        <label class="fw-bold">Publish Date</label>
+	        						        <input name="date" id="date" type="date" placeholder="Publish Date" class="form-control login_field " value="{{$data->date}}">
+	                                    </div>
+	                                    <div class="col-6 form-group">
+		                            		<label class="fw-bold"> Status</label>
+		                            	    <select class="form-control form-select" name="isActive">
+		                            	    	<option value="active" @if($data->isActive == "active") selected @endif>Active</option>
+		                            	    	<option value="inactive" @if($data->isActive == "inactive") selected @endif>Inactive</option>
+		                            	    </select>
+			                            </div>
+			                        </div>
+
+			                        <div class="row">
+			                            <div class="col-12 form-group">
+			                                <label class="fw-bold">Related Bogs</label>
+									        <select class="select2" multiple="multiple" data-placeholder="Select options" style="width: 100%;" name="relatedBogs[]">
+		                            	    	<option value="">Select</option>
+		                            	    	<?php $selectedIds = explode(',', $data->relatedBogs); ?>
+		                            	    	@foreach($blog as $blogs)
+		                            	    		<option value="{{ $blogs->id }}" @if(in_array($blogs->id, $selectedIds)) selected @endif>{{ $blogs->name }}</option>
+		                            	    	@endforeach
+		                            	    </select>
+			                            </div>
+			                        </div>
+
+			                        <div class="form-group">
+                                        <label class="fw-bold">Blog Image</label>
+        						        <input name="image" id="image" type="file" class="form-control login_field ">
+        						        <img src="{{ asset('/upload/images/blog/'.$data->image)}}" class="my-3" style="width: 200px;">
+                                    </div>
+
+                                    <div class="form-group">
+                                    	<label class="fw-bold">Content</label>
+                                    	<textarea class="editor" name="content">{{ $data->content }}</textarea>
+                                    </div>
+		                            
+		                        </div>
+
+		                        <div class="card-footer">
+		                            <button type="submit" class="btn btn-primary">Update</button>
+		                        </div>
+		                    </form>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</section>
+	</div>
+
+@endsection
+
+@push('scripts')
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+
+	<script>
+		$(document).ready(function() {
+		  $('.select2').select2();
+		});
+	    ClassicEditor
+			.create( document.querySelector( '.editor' ), {
+				ckfinder: {
+	                uploadUrl: '{{route('blogImage').'?_token='.csrf_token()}}',
+	            }
+			} )
+			.catch( error => {
+				console.error( error );
+			} );
+	</script>
+
+@endpush

@@ -1,0 +1,28 @@
+/* general styling */
+  
+body {
+    font-size: var(--fs-body) !important;
+    font-family: var(--ff-body) !important;
+    color: var(--clr-neutral-800);
+  }
+ p{
+    position: relative;
+    font-size: var(--fs-500);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  
+.inside-page{
+  position: relative;
+  margin-top: 140px;
+}
+
+#btn-back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: none;
+  width: 40px;
+  background-color: transparent;
+  border: none;
+}

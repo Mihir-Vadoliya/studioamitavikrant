@@ -1,0 +1,5 @@
+---
+deployments:
+  - destination: /home4/carpetsw/jpexports.net
+    repo: git@github.com:Mihir-Vadoliya/jk-exports.git
+    branch: main
