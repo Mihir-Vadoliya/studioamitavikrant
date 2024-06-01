@@ -24,7 +24,7 @@ use App\Http\Controllers\HomeController;
 
 
 Auth::routes();
-
+// Test
 //Admin Routes
 Route::group(['prefix' => 'admin', 'middleware' => ['guest']], function(){
     Route::get('/login', [AdminLoginController::class, 'login'])->name('adminLogin');
