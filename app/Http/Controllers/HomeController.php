@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Project;
 use App\Models\ProjectDescription;
+use App\Models\MetaSettings;
 
 class HomeController extends Controller
 {
@@ -38,8 +39,10 @@ class HomeController extends Controller
     {
         $project = Project::where('name', str_replace('_', ' ', $projectName))->first();
         $projectDescriptions = ProjectDescription::where('project_id',$project->id)->get();
+
+        $metaData = MetaSettings::where('refferance_id', $project->id)->where('page', 'project')->first();
         
-        return view('front.projectDetails', compact('project', 'projectDescriptions'));
+        return view('front.projectDetails', compact('project', 'projectDescriptions', 'metaData'));
     }
 
     public function projectList()
@@ -66,7 +69,9 @@ class HomeController extends Controller
         $relatedBogs = explode(",", $data->relatedBogs);
         $relatedBlogs = Blog::whereIn('id', $relatedBogs)->get();
 
-        return view('front.newsDetails',compact('data','previousRecord', 'nextRecord', 'relatedBlogs'));
+        $metaData = MetaSettings::where('refferance_id', $data->id)->where('page', $data->page)->first();
+
+        return view('front.newsDetails',compact('data','previousRecord', 'nextRecord', 'relatedBlogs', 'metaData'));
     }
 
     public function research()
@@ -86,7 +91,9 @@ class HomeController extends Controller
         $relatedBogs = explode(",", $data->relatedBogs);
         $relatedBlogs = Blog::whereIn('id', $relatedBogs)->get();
 
-        return view('front.researchDetails',compact('data','previousRecord', 'nextRecord', 'relatedBlogs'));
+        $metaData = MetaSettings::where('refferance_id', $data->id)->where('page', $data->page)->first();
+
+        return view('front.researchDetails',compact('data','previousRecord', 'nextRecord', 'relatedBlogs', 'metaData'));
     }
 
     public function partners()

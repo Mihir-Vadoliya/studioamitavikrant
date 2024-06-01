@@ -41,6 +41,8 @@
 							    @csrf
 							    @method('PUT')
 							    
+								{!! \App\Helpers\HtmlHelper::metaForm($metaData) !!}
+
 		                        <div class="card-body">
 		                            <div class="form-group">
 		                                <label class="fw-bold"> Name</label>
@@ -49,11 +51,12 @@
 		                            <div class="row">
 			                            <div class="col-6 form-group">
 	                                		<label class="fw-bold">Category</label>
-	                                	    <select class="form-control form-select" name="category_id">
+	                                	    <select class="select2" multiple="multiple" data-placeholder="Select options" style="width: 100%;" name="category_id[]">
 	                                	    	<option value="">Select</option>
-	                                	    	@foreach($category as $cat)
-	                                	    		<option value="{{ $cat->id }}" @if($data->category_id == $cat->id) selected @endif>{{ $cat->name }}</option>
-	                                	    	@endforeach
+												<?php $selectedIds = explode(',', $data->category_id); ?>
+		                            	    	@foreach($category as $cat)
+		                            	    		<option value="{{ $cat->id }}" @if(in_array($cat->id, $selectedIds)) selected @endif>{{ $cat->name }}</option>
+		                            	    	@endforeach
 	                                	    </select>
 	    	                            </div>
 	    	                            <div class="col-6 form-group">

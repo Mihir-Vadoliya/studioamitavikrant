@@ -15,4 +15,11 @@ class Blog extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function getCategoryNamesAttribute()
+    {
+        $categoryIds = explode(',', $this->category_id);
+        $categories = Category::whereIn('id', $categoryIds)->pluck('name')->toArray();
+        return $categories;
+    }
 }

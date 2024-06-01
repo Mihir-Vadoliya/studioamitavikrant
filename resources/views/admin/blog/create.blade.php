@@ -43,6 +43,8 @@
 							    @csrf
 							    @method('POST')
 							    
+								{!! \App\Helpers\HtmlHelper::metaForm() !!}
+								
 		                        <div class="card-body">
 		                            <div class="form-group">
 		                                <label class="fw-bold">Name</label>
@@ -51,7 +53,7 @@
 		                            <div class="row">
 	    	                            <div class="col-6 form-group">
 	                                		<label class="fw-bold">Category</label>
-	                                	    <select class="form-control form-select" name="category_id">
+	                                	    <select class="select2" multiple="multiple" data-placeholder="Select options" style="width: 100%;" name="category_id[]">
 	                                	    	<option value="">Select</option>
 	                                	    	@foreach($data as $cat)
 	                                	    		<option value="{{ $cat->id }}">{{ $cat->name }}</option>

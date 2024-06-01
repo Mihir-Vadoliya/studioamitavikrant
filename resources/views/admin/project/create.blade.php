@@ -51,6 +51,8 @@
 							    @csrf
 							    @method('POST')
 							    
+								{!! \App\Helpers\HtmlHelper::metaForm() !!}
+
 		                        <div class="card-body border border-success">
 		                        	<h3>PROJECT SUMMARY</h3>
 		                        	<div class="row">

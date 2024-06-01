@@ -51,9 +51,9 @@
 
                     	@foreach($data as $blog)
 
-                        <div class="col-md-3 col-sm-6 col-12 filter {{ strtolower($blog->category->name) }}">
+                        <div class="col-md-3 col-sm-6 col-12 filter {{ strtolower(str_replace(',', ' ', implode(', ', $blog->category_names))) }}">
 
-                            <a href="{{ route('newsDetails',$blog->id)}}" class="newsThumb">
+                            <a href="{{ route('newsDetails', ['newsDetails' => $blog->id, 'newsName' => str_replace(' ', '_', $blog->name)]) }}" class="newsThumb">
 
                                 <div class="date">{{ \Carbon\Carbon::parse($blog->date)->format('F j, Y'); }}</div>
 
@@ -135,28 +135,15 @@
 
 			var value = $(this).attr('data-filter');
 
-
-
 			if(value == "all")
-
 			{
-
 			    $('.filter').show('1000');
-
 			}
-
 			else
-
 			{
-
 			    $(".filter").not('.'+value).hide('3000');
-
 			    $('.filter').filter('.'+value).show('3000');
-
-			    
-
 			}
-
 		});
 
 	});

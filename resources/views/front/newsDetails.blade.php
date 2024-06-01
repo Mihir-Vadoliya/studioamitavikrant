@@ -141,8 +141,8 @@
 	                            <div class="col-5">
 
 	                        		@if ($previousRecord != null) 
-
-	                                <a href="{{ route('newsDetails',$previousRecord->id)}}" class="navNews">
+									
+	                                <a href="{{ route('newsDetails', ['newsDetails' => $previousRecord->id, 'newsName' => str_replace(' ', '_', $previousRecord->name)]) }}" class="navNews">
 
 	                                    <div class="arrow">
 
@@ -177,8 +177,8 @@
 	                            <div class="col-5">
 
 	                            	@if ($nextRecord != null)
-
-	                                <a href="{{ route('newsDetails',$nextRecord->id)}}" class="navNews">
+									
+	                                <a href="{{ route('newsDetails', ['newsDetails' => $nextRecord->id, 'newsName' => str_replace(' ', '_', $nextRecord->name)]) }}" class="navNews">
 
 	                                    <div class="thumb">
 

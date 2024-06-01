@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\MetaSettings;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -51,7 +52,7 @@ class BlogController extends Controller
         $blog->name = $data['name'];
         $blog->image = $data['image'];
         $blog->content = $data['content'];
-        $blog->category_id = $data['category_id'];
+        $blog->category_id = implode(",", $data['category_id']??[]);
         $blog->page = $data['page'];
         $blog->date = $data['date'];
         $blog->relatedBogs = implode(",", $data['relatedBogs']?? []);
@@ -65,6 +66,23 @@ class BlogController extends Controller
         }
         
         $blog->save();
+
+        $metaDetails = json_encode([
+            'meta_title' => $request->meta_title ?? null,
+            'meta_keywords' => $request->meta_keywords ?? null,
+            'meta_description' => $request->meta_description ?? null,
+        ]);
+
+        MetaSettings::updateOrCreate(
+            [
+                'refferance_id' => $blog->id,
+                'page' => $data['page']
+            ],
+            [
+                'meta_details' => $metaDetails
+            ]
+        );
+
 
         session()->flash('success', 'Data Create successfully.');
 
@@ -87,8 +105,9 @@ class BlogController extends Controller
         $data = $blog;
         $category = Category::get();
         $blog = Blog::whereNotIn('id', [$blog->id])->get();
+        $metaData = MetaSettings::where('refferance_id', $data->id)->where('page', $data->page)->first();
 
-        return view('admin.blog.edit', compact('data','category', 'blog'));
+        return view('admin.blog.edit', compact('data','category', 'blog', 'metaData'));
     }
 
     /**
@@ -110,7 +129,7 @@ class BlogController extends Controller
         $blog = Blog::findOrFail($blog->id);
         $blog->name = $data['name'];
         $blog->content = $data['content'];
-        $blog->category_id = $data['category_id'];
+        $blog->category_id = implode(",", $data['category_id']??[]);
         $blog->page = $data['page'];
         $blog->date = $data['date'];
         $blog->relatedBogs = implode(",", $data['relatedBogs']?? []);
@@ -124,6 +143,23 @@ class BlogController extends Controller
         }
 
         $blog->save();
+
+        $metaDetails = json_encode([
+            'meta_title' => $request->meta_title ?? null,
+            'meta_keywords' => $request->meta_keywords ?? null,
+            'meta_description' => $request->meta_description ?? null,
+        ]);
+
+        MetaSettings::updateOrCreate(
+            [
+                'refferance_id' => $blog->id,
+                'page' => $data['page']
+            ],
+            [
+                'meta_details' => $metaDetails
+            ]
+        );
+    
 
         session()->flash('success', 'Data Create successfully.');
 

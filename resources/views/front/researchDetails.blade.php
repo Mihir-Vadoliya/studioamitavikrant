@@ -218,7 +218,7 @@
 
                         		@if ($previousRecord != null) 
 
-                               	<a href="{{ route('researchDetails',$previousRecord->id)}}" class="navNews">
+                               	<a href="{{ route('researchDetails', ['researchDetails' => $previousRecord->id, 'researchName' => str_replace(' ', '_', $previousRecord->name)]) }}" class="navNews">
 
                                     <div class="arrow">
 
@@ -254,7 +254,7 @@
 
                             	@if ($nextRecord != null)
 
-                                <a href="{{ route('researchDetails',$nextRecord->id)}}" class="navNews">
+                                <a href="{{ route('researchDetails', ['researchDetails' => $nextRecord->id, 'researchName' => str_replace(' ', '_', $nextRecord->name)]) }}" class="navNews">
 
                                     <div class="thumb">
 

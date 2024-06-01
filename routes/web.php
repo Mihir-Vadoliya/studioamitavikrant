@@ -66,7 +66,7 @@ Route::get('/process', [HomeController::class, 'process'])->name('process');
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 
 Route::get('/news', [HomeController::class, 'news'])->name('news');
-Route::get('/news/{newsDetails}', [HomeController::class, 'newsDetails'])->name('newsDetails');
+Route::get('/news/{newsDetails}/{newsName?}', [HomeController::class, 'newsDetails'])->name('newsDetails');
 
 Route::get('/research', [HomeController::class, 'research'])->name('research');
-Route::get('/research/{researchDetails}', [HomeController::class, 'researchDetails'])->name('researchDetails');
+Route::get('/research/{researchDetails}/{researchName?}', [HomeController::class, 'researchDetails'])->name('researchDetails');

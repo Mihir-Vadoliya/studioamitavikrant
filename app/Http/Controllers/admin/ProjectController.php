@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Category;
 use App\Models\ProjectTeam;
 use App\Models\ProjectDescription;
+use App\Models\MetaSettings;
 use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
@@ -114,6 +115,22 @@ class ProjectController extends Controller
             ]);
         }
 
+        $metaDetails = json_encode([
+            'meta_title' => $request->meta_title ?? null,
+            'meta_keywords' => $request->meta_keywords ?? null,
+            'meta_description' => $request->meta_description ?? null,
+        ]);
+
+        MetaSettings::updateOrCreate(
+            [
+                'refferance_id' => $project->id,
+                'page' => "project"
+            ],
+            [
+                'meta_details' => $metaDetails
+            ]
+        );
+
         session()->flash('success', 'Data Create successfully.');
 
         return redirect()->back();
@@ -138,7 +155,9 @@ class ProjectController extends Controller
         $projectTeam = ProjectTeam::get();
         $project = Project::whereNotIn('id', [$project->id])->get();
 
-        return view('admin.project.edit', compact('data','category','projectTeam','project','projectDescriptions'));
+        $metaData = MetaSettings::where('refferance_id', $data->id)->where('page', 'project')->first();
+
+        return view('admin.project.edit', compact('data','category','projectTeam','project','projectDescriptions', 'metaData'));
     }
 
     /**
@@ -251,6 +270,21 @@ class ProjectController extends Controller
             }
         }
 
+        $metaDetails = json_encode([
+            'meta_title' => $request->meta_title ?? null,
+            'meta_keywords' => $request->meta_keywords ?? null,
+            'meta_description' => $request->meta_description ?? null,
+        ]);
+
+        MetaSettings::updateOrCreate(
+            [
+                'refferance_id' => $project->id,
+                'page' => 'project'
+            ],
+            [
+                'meta_details' => $metaDetails
+            ]
+        );
 
         session()->flash('success', 'Data Update successfully.');
 

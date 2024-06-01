@@ -42,7 +42,6 @@
 										<tr>
 											<th>Id</th>
 											<th>Name</th>
-											<th>Category</th>
 											<th>Publish Page</th>
 											<th>Date</th>
 											<th>Status</th>
@@ -54,7 +53,6 @@
 										<tr>
 											<td>{{ ++$key }}</td>
 											<td>{{ $value->name }}</td>
-											<td>{{ $value->category->name }}</td>
 											<td>{{ $value->page }}</td>
 											<td>{{ $value->date }}</td>
 											<td> 

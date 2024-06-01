@@ -51,6 +51,8 @@
 							    @csrf
 							    @method('PUT')
 							    
+								{!! \App\Helpers\HtmlHelper::metaForm($metaData) !!}
+
 		                        <div class="card-body border border-success">
 		                        	<h3>PROJECT SUMMARY</h3>
 		                        	<div class="row">
