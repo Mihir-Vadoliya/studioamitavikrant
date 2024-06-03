@@ -22,8 +22,9 @@
 		                        </li>
 		                    </ul>
 		                    <h1>{{ $value->name }}</h1>
+							
 		                    <p>
-		                    	{!!  \App\Helpers\HtmlHelper::extractTextFromHtml($value->project_introduction) !!}
+		                    	{!!  substr(\App\Helpers\HtmlHelper::extractTextFromHtml($value->projectDescriptions->first()->description), 0, 120).'...' !!}
 		                    </p>
 		                    <div class="button">
 		                        <a href="{{ route('project_details',str_replace(' ', '_', $value->name)) }}">View Project</a>

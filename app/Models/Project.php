@@ -40,5 +40,9 @@ class Project extends Model
         return $similarProjects;
     }
 
+    public function projectDescriptions()
+    {
+        return $this->hasMany(ProjectDescription::class);
+    }
 
 }

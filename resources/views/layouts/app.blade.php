@@ -19,7 +19,7 @@
 </head>
 
 <body 
-    @if(Route::currentRouteName() != 'contact')
+    @if(Route::currentRouteName() != 'contact' || Route::currentRouteName() != 'project_details')
         class="dark"
     @endif
     @if(Route::currentRouteName() != 'home')

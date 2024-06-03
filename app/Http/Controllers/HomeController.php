@@ -25,7 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $projects = Project::latest('completion_date')->take(7)->get();
+        $projects = Project::latest('completion_date')
+            ->with('projectDescriptions')
+            ->take(7)
+            ->get();
 
         return view('front.index',compact('projects'));
     }
