@@ -53,12 +53,6 @@
                                 <p>Project Categories</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('projectTeam.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Project Team</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
 

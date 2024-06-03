@@ -140,7 +140,7 @@
 			                            </div>
 			                            <div class="col-6 form-group">
 			                            	<div>
-				                                <input type="text" name="project_team_title" placeholder="Project Team" class="form-control login_field" value="{{ $data->project_summary_title }}">
+				                                <input type="text" name="project_team_title" placeholder="Project Team" class="form-control login_field" value="{{ $data->project_team_title }}">
 			                            	</div>
 			                            	<div class="mt-3">
 			                                	<textarea class="project_team_details" name="project_team_details">
