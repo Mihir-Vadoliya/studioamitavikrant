@@ -96,7 +96,7 @@
 
 	                                    </a>
 
-	                                            <a href="{{ route('newsDetails',$relatedBlog->id)}}" class="news">{{ $relatedBlog->page}}</a>
+	                                            <a href="{{ route('newsDetails',$relatedBlog->name)}}" class="news">{{ $relatedBlog->page}}</a>
 
 	                                </div>
 
@@ -142,7 +142,7 @@
 
 	                        		@if ($previousRecord != null) 
 									
-	                                <a href="{{ route('newsDetails', ['newsDetails' => $previousRecord->id, 'newsName' => str_replace(' ', '_', $previousRecord->name)]) }}" class="navNews">
+	                                <a href="{{ route('newsDetails', ['newsName' => str_replace(' ', '_', $previousRecord->name)]) }}" class="navNews">
 
 	                                    <div class="arrow">
 
@@ -178,7 +178,7 @@
 
 	                            	@if ($nextRecord != null)
 									
-	                                <a href="{{ route('newsDetails', ['newsDetails' => $nextRecord->id, 'newsName' => str_replace(' ', '_', $nextRecord->name)]) }}" class="navNews">
+	                                <a href="{{ route('newsDetails', ['newsName' => str_replace(' ', '_', $nextRecord->name)]) }}" class="navNews">
 
 	                                    <div class="thumb">
 

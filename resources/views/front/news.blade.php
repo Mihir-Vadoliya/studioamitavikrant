@@ -53,7 +53,7 @@
 
                         <div class="col-md-3 col-sm-6 col-12 filter {{ strtolower(str_replace(',', ' ', implode(', ', $blog->category_names))) }}">
 
-                            <a href="{{ route('newsDetails', ['newsDetails' => $blog->id, 'newsName' => str_replace(' ', '_', $blog->name)]) }}" class="newsThumb">
+                            <a href="{{ route('newsDetails', ['newsName' => str_replace(' ', '_', $blog->name)]) }}" class="newsThumb">
 
                                 <div class="date">{{ \Carbon\Carbon::parse($blog->date)->format('F j, Y'); }}</div>
 

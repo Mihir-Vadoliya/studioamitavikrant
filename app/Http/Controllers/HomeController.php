@@ -64,10 +64,10 @@ class HomeController extends Controller
 
     public function newsDetails(Request $request)
     {
-        $data = Blog::where('id', $request->newsDetails)->first();
+        $data = Blog::where('name', str_replace('_', ' ', $request->newsName))->first();
 
-        $previousRecord = Blog::where('page','news')->where('id', '<', $request->newsDetails)->orderBy('id', 'desc')->first();
-        $nextRecord = Blog::where('page','news')->where('id', '>', $request->newsDetails)->orderBy('id', 'asc')->first();
+        $previousRecord = Blog::where('page','news')->where('id', '<', $data->id)->orderBy('id', 'desc')->first();
+        $nextRecord = Blog::where('page','news')->where('id', '>', $data->id)->orderBy('id', 'asc')->first();
 
         $relatedBogs = explode(",", $data->relatedBogs);
         $relatedBlogs = Blog::whereIn('id', $relatedBogs)->get();
@@ -86,10 +86,10 @@ class HomeController extends Controller
 
     public function researchDetails(Request $request)
     {
-        $data = Blog::where('id', $request->researchDetails)->first();
+        $data = Blog::where('name', str_replace('_', ' ', $request->researchName))->first();
 
-        $previousRecord = Blog::where('page','research')->where('id', '<', $request->researchDetails)->orderBy('id', 'desc')->first();
-        $nextRecord = Blog::where('page','research')->where('id', '>', $request->researchDetails)->orderBy('id', 'asc')->first();
+        $previousRecord = Blog::where('page','research')->where('id', '<', $data->id)->orderBy('id', 'desc')->first();
+        $nextRecord = Blog::where('page','research')->where('id', '>', $data->id)->orderBy('id', 'asc')->first();
 
         $relatedBogs = explode(",", $data->relatedBogs);
         $relatedBlogs = Blog::whereIn('id', $relatedBogs)->get();

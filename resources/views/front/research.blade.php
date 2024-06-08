@@ -21,7 +21,7 @@
 	            
 	                	@foreach($data as $blog)
                         <div class="col-md-3 col-sm-6 col-12 filter {{ strtolower(str_replace(',', ' ', implode(', ', $blog->category_names))) }}">
-                            <a href="{{ route('researchDetails', ['researchDetails' => $blog->id, 'researchName' => str_replace(' ', '_', $blog->name)]) }}" class="newsThumb">
+                            <a href="{{ route('researchDetails', ['researchName' => str_replace(' ', '_', $blog->name)]) }}" class="newsThumb">
                                 <div class="date">{{ \Carbon\Carbon::parse($blog->date)->format('F j, Y'); }}</div>
                                 <div class="thumbImg">
                                     <img src="{{ asset('/upload/images/blog/'.$blog->image)}}" class="newsImg" alt="">
