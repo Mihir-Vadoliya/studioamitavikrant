@@ -70,3 +70,4 @@ Route::get('/news/{newsName?}', [HomeController::class, 'newsDetails'])->name('n
 
 Route::get('/research', [HomeController::class, 'research'])->name('research');
 Route::get('/research/{researchName?}', [HomeController::class, 'researchDetails'])->name('researchDetails');
+
