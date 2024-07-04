@@ -18,12 +18,13 @@
     @stack('styles')
 </head>
 
-<body id="light">
-    <style>
-        header {
-            background-color: #FFF;
-        }
-    </style>
+<body>
+    @if(Route::currentRouteName() != 'contact' || Route::currentRouteName() != 'project_details')
+        class="dark"
+    @endif
+    @if(Route::currentRouteName() != 'home')
+        id="light"
+    @endif
 
     @include('layouts.header')
 
